@@ -115,7 +115,7 @@ class FullscreenActivity : AppCompatActivity() {
 
         // Set timer for screen timeout
 
-        object : CountDownTimer(30000, 36000000) {
+        object : CountDownTimer(36000000, 36000000) {
 
             override fun onTick(millisUntilFinished: Long) {
 //                fullscreenContent.setText("seconds remaining: " + millisUntilFinished / 1000)

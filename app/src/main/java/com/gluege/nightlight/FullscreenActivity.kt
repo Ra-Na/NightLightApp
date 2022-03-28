@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.provider.Settings
 import android.support.v7.app.AppCompatActivity
 import android.view.MotionEvent
 import android.view.View
@@ -112,27 +113,35 @@ class FullscreenActivity : AppCompatActivity() {
         anim.setRepeatCount(ValueAnimator.INFINITE);
         anim.start();
 
-//  Pseudocode for fixing color cycling on devices with animations disabled
-//  if animation disabled:    // use this: https://stackoverflow.com/a/42670723/4301593
-//       time = 0
-//       updateinterval = 200
-//  else
-//       updateinterval = 3600000        
-        
-        
-        
-        // Set timer for screen timeout and color cycling if animations are deactivated
+        var updateinterval=3600000L
+        var time=0F
 
-        object : CountDownTimer(36000000, 36000000) {   // here second argument = updateinterval
+//  fixing color cycling on devices with animations disabled
+//  by setting timer for screen timeout and color cycling manually
+        val duration = Settings.Global.getFloat(
+            this.getContentResolver(),
+            Settings.Global.ANIMATOR_DURATION_SCALE, 1F
+        )
+        val transition = Settings.Global.getFloat(
+            this.getContentResolver(),
+            Settings.Global.TRANSITION_ANIMATION_SCALE, 1F
+        )
+        if(duration==0F || transition==0F){
+            updateinterval = 100L
+        }
+
+        object : CountDownTimer(3600000, updateinterval) {
 
             override fun onTick(millisUntilFinished: Long) {
-                
-//              here cycle color by 
+//              here cycle color by
 //                1 - incrementing time
 //                2 - calc color
 //                3 - set bk color
-//              fullscreenContent.setText("seconds remaining: " + millisUntilFinished / 1000)  // for debugging
-                  
+                time += 0.005F
+                hsv[0] = (360F * time).mod(360F)
+                var runColor = Color.HSVToColor(hsv)
+                fullscreenContent.setBackgroundColor(runColor)
+                //fullscreenContent.setText("seconds remaining: " + millisUntilFinished / 1000)  // for debugging
             }
 
             override fun onFinish() {
@@ -153,7 +162,7 @@ class FullscreenActivity : AppCompatActivity() {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(100)
+        delayedHide(1000)
     }
 
     private fun toggle() {

@@ -112,17 +112,31 @@ class FullscreenActivity : AppCompatActivity() {
         anim.setRepeatCount(ValueAnimator.INFINITE);
         anim.start();
 
+//  Pseudocode for fixing color cycling on devices with animations disabled
+//  if animation disabled:    // use this: https://stackoverflow.com/a/42670723/4301593
+//       time = 0
+//       updateinterval = 200
+//  else
+//       updateinterval = 3600000        
+        
+        
+        
+        // Set timer for screen timeout and color cycling if animations are deactivated
 
-        // Set timer for screen timeout
-
-        object : CountDownTimer(36000000, 36000000) {
+        object : CountDownTimer(36000000, 36000000) {   // here second argument = updateinterval
 
             override fun onTick(millisUntilFinished: Long) {
-//                fullscreenContent.setText("seconds remaining: " + millisUntilFinished / 1000)
+                
+//              here cycle color by 
+//                1 - incrementing time
+//                2 - calc color
+//                3 - set bk color
+//              fullscreenContent.setText("seconds remaining: " + millisUntilFinished / 1000)  // for debugging
+                  
             }
 
             override fun onFinish() {
-//                fullscreenContent.setText("done!")
+//                fullscreenContent.setText("done!")  // for debugging
                 fullscreenContent.keepScreenOn=false
             }
         }.start()

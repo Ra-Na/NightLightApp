@@ -97,20 +97,20 @@ class FullscreenActivity : AppCompatActivity() {
 //        binding.dummyButton.setOnTouchListener(delayHideTouchListener)
 
         // Change background color
-        var anim = ValueAnimator.ofFloat(0F, 1F)
-        anim.setDuration(20000)
+        val anim = ValueAnimator.ofFloat(0F, 1F)
+        anim.duration = 20000
         val hsv = FloatArray(3)
-        val runcolor=1
-        val hue=0
+//        val runcolor=1
+//        val hue=0
         hsv[1]=1.0F
         hsv[2]=1.0F
 
         anim.addUpdateListener { animation ->
             hsv[0] = 360 * animation.animatedFraction
-            var runColor = Color.HSVToColor(hsv)
+            val runColor = Color.HSVToColor(hsv)
             fullscreenContent.setBackgroundColor(runColor)
         }
-        anim.setRepeatCount(ValueAnimator.INFINITE);
+        anim.repeatCount = ValueAnimator.INFINITE
         anim.start();
 
         var updateinterval=3600000L
@@ -119,11 +119,11 @@ class FullscreenActivity : AppCompatActivity() {
 //  fixing color cycling on devices with animations disabled
 //  by setting timer for screen timeout and color cycling manually
         val duration = Settings.Global.getFloat(
-            this.getContentResolver(),
+            this.contentResolver,
             Settings.Global.ANIMATOR_DURATION_SCALE, 1F
         )
         val transition = Settings.Global.getFloat(
-            this.getContentResolver(),
+            this.contentResolver,
             Settings.Global.TRANSITION_ANIMATION_SCALE, 1F
         )
         if(duration==0F || transition==0F){
@@ -139,7 +139,7 @@ class FullscreenActivity : AppCompatActivity() {
 //                3 - set bk color
                 time += 0.005F
                 hsv[0] = (360F * time).mod(360F)
-                var runColor = Color.HSVToColor(hsv)
+                val runColor = Color.HSVToColor(hsv)
                 fullscreenContent.setBackgroundColor(runColor)
                 //fullscreenContent.setText("seconds remaining: " + millisUntilFinished / 1000)  // for debugging
             }

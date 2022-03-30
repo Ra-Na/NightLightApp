@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">NightLight</string>
-    <string name="dummy_button">Dummy Button</string>
+    <string name="app_name">NightLight light</string>
 </resources>
 
 <!-- <string name="dummy_content">DUMMY\nCONTENT</string> -->

@@ -1,0 +1,2 @@
+json_key_file("/home/gluege/AndroidStudioProjects/pc-api-8746613454028434607-881-ddc477a2b54c.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("") # e.g. com.krausefx.app

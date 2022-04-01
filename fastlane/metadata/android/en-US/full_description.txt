@@ -1,0 +1,3 @@
+This is the simplest possible night light app for android.
+It cycles colors on a full screen display. After one hour the display turns off.
+The app is add- and tracking free. The app does not connect to any servers. It uses only Android native libraries. It is published under GPL 3.0.
